@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Friends List</title>
+</head>
+<body>
+  <h1>Steam Friends List</h1>
+  <form id="steamForm" method="post" action="/getFriends">
+    <label for="steamID">Enter Steam ID:</label>
+    <input type="text" id="steamID" name="steamID" required placeholder="Ex. 76561197960435530">
+    <button type="submit">Get Friends</button>
+  </form>
+  <p>If you need a SteamID to test for friends use: <strong>76561197960435530</strong></p>
+  <p>Objects will display each friend's SteamID, their relationship (should always be friend in this case) and friend_since which is a Unix timestamp of the time when the relationship was created.</p>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('steamForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: new URLSearchParams(formData),
+      });
+      const friendsList = await response.json();
+      if (response.ok) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '<h2>Friends:</h2>';
+        const ul = document.createElement('ul');
+        friendsList.forEach(friend => {
+          const li = document.createElement('li');
+          li.textContent = JSON.stringify(friend, null, 2);  // Display the entire friend object
+          ul.appendChild(li);
+        });
+        resultDiv.appendChild(ul);
+      } else {
+        document.getElementById('result').textContent = friendsList.error;
+      }
+    });
+  </script>
+</body>
+</html>

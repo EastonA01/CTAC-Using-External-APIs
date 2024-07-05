@@ -1,0 +1,25 @@
+{
+  "name": "ctac-using-external-apis",
+  "version": "1.0.0",
+  "description": "simple web application using Node.js, Express, and an external API of my choice",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EastonA01/CTAC-Using-External-APIs.git"
+  },
+  "author": "EastonA01",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EastonA01/CTAC-Using-External-APIs/issues"
+  },
+  "homepage": "https://github.com/EastonA01/CTAC-Using-External-APIs#readme",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "path": "^0.12.7"
+  }
+}
